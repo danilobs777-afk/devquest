@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<title>DevQuest II — A Saga do Engenheiro de IA</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DevQuest">
+<meta name="theme-color" content="#0A0B0F">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAEV0lEQVR4nO3cTY4TRxyHYU/EChacIILFrOcAkVCUi2QzF5mLeMMdskZRpJxjpFwki4kcg/vXX65uu6qeZ8fA4Jbr5V/VjeHh/YePBxjy060vgPslDiJxEImDSBxE73Z7pZfnz7u9VvNejq87vMrDpreygtjBdqFsEocmbqJ4JSXjGG9in0nYiX3e6mJxDF6uIHaw3TtfII7Li9PETRRfiGvj+OGCZHFzBVdkfRyyuGdFVmflQzBl3LkfVmTd/eOayXH+SrK4c9cs1uLJoYy6nK/R0vmxLA5l1Gh1HwviUEa91vUxNw5l1G5FH8vPHMqo1iYH0lNoyqjdaQXnDI/pOPwVa6smV3bJgdTYaML8dZyIw4bSpJmby1gcNpQejKzyvAOpsdGcOWvq0+dEMQ6njeZNnjxMDiJxfOfb8cutL+GODMdhT+nE+M5icvzvbWwYHifiIBIH0UAcfR44zneTrnaWkWOHyUEkDiJxHA5D+0hXO0siDiJxfOfT49Onx6dbX8W9EEfcQews4iDqPY7x8dD58Og9DkaIg6jrOObsGj3vLF3HwThxEPUbx/z9otudpd84mCQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg+jdrS/gKi/Pn1d/759//3P5xd8fnwZ/6poXejm+rv7e26o1jmtWa8TXr38U/z3fLrXGRGwrRFXGsdHY2FSN11xlHOxDHETiIBIHUZVx1HhbWOM1VxkH+6j2Idjx9VDJ/WGNM+NNrXG8KfK+jxRW77oW0fu2Mj57qphM2+k9DkaIg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEE0EMfpEy6df5qhE6dVvvxkk8lBVPfHBAv69Zefz384+G/we9N7HC/H12/HL5dff2vlt+e/dr+iO/Lw/sPHwZ8Y2YqaMZjFpYYTGV/lfs8cM8tY9Csb028cTIpxtH1Du3QYNDk8Jk8OJgfRrDgaGx7rxkBjw2POmo7F0fB9CicjqzwxOdo+eXRr5nOKBWcOfbRh/jpOx2FzadXkys47kLa1uax74tnGc9JFD74X38q20Ueflq7d3DjOQ2ugj6VjoIGxcb5qM48KSw6kbfXRlRVlHJZuKy31MX8Y1D421pVxGPkr+y1e7D6NPPqsPYvDdYu1Jo7DxdhoL5HGsjisWqOVcRR5bbZTZHXWx1HwIiio4IpcG8fl1RwkciPFF6JAHP9dx9DNi0p2sN07XyyOw+R/+CqUcvZ5q0vGcVL7I5BKFf/jt0kcJyrZwXYjeds4zgmloH326P3ioDo+fU4kDiJxEImD6F/LekxUsvYCGQAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAEV0lEQVR4nO3cTY4TRxyHYU/EChacIILFrOcAkVCUi2QzF5mLeMMdskZRpJxjpFwki4kcg/vXX65uu6qeZ8fA4Jbr5V/VjeHh/YePBxjy060vgPslDiJxEImDSBxE73Z7pZfnz7u9VvNejq87vMrDpreygtjBdqFsEocmbqJ4JSXjGG9in0nYiX3e6mJxDF6uIHaw3TtfII7Li9PETRRfiGvj+OGCZHFzBVdkfRyyuGdFVmflQzBl3LkfVmTd/eOayXH+SrK4c9cs1uLJoYy6nK/R0vmxLA5l1Gh1HwviUEa91vUxNw5l1G5FH8vPHMqo1iYH0lNoyqjdaQXnDI/pOPwVa6smV3bJgdTYaML8dZyIw4bSpJmby1gcNpQejKzyvAOpsdGcOWvq0+dEMQ6njeZNnjxMDiJxfOfb8cutL+GODMdhT+nE+M5icvzvbWwYHifiIBIH0UAcfR44zneTrnaWkWOHyUEkDiJxHA5D+0hXO0siDiJxfOfT49Onx6dbX8W9EEfcQews4iDqPY7x8dD58Og9DkaIg6jrOObsGj3vLF3HwThxEPUbx/z9otudpd84mCQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg+jdrS/gKi/Pn1d/759//3P5xd8fnwZ/6poXejm+rv7e26o1jmtWa8TXr38U/z3fLrXGRGwrRFXGsdHY2FSN11xlHOxDHETiIBIHUZVx1HhbWOM1VxkH+6j2Idjx9VDJ/WGNM+NNrXG8KfK+jxRW77oW0fu2Mj57qphM2+k9DkaIg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEE0EMfpEy6df5qhE6dVvvxkk8lBVPfHBAv69Zefz384+G/we9N7HC/H12/HL5dff2vlt+e/dr+iO/Lw/sPHwZ8Y2YqaMZjFpYYTGV/lfs8cM8tY9Csb028cTIpxtH1Du3QYNDk8Jk8OJgfRrDgaGx7rxkBjw2POmo7F0fB9CicjqzwxOdo+eXRr5nOKBWcOfbRh/jpOx2FzadXkys47kLa1uax74tnGc9JFD74X38q20Ueflq7d3DjOQ2ugj6VjoIGxcb5qM48KSw6kbfXRlRVlHJZuKy31MX8Y1D421pVxGPkr+y1e7D6NPPqsPYvDdYu1Jo7DxdhoL5HGsjisWqOVcRR5bbZTZHXWx1HwIiio4IpcG8fl1RwkciPFF6JAHP9dx9DNi0p2sN07XyyOw+R/+CqUcvZ5q0vGcVL7I5BKFf/jt0kcJyrZwXYjeds4zgmloH326P3ioDo+fU4kDiJxEImD6F/LekxUsvYCGQAAAABJRU5ErkJggg==">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#C9A84C; --gold-light:#E8CC7A; --gold-dim:#8A6E2F;
+  --bg:#0A0B0F; --bg2:#0F1018; --bg3:#14161F; --bg4:#1A1D2A;
+  --border:#2A2D3E; --border-gold:#3D3420;
+  --text:#D4C9A8; --text-dim:#7A7060; --text-bright:#F0E6C8;
+  --red:#C0392B; --blue:#2E75B6; --blue-light:#4A9BD4;
+  --green:#27AE60; --purple:#9B59B6; --purple-deep:#6B2D8B;
+  --cyan:#1ABC9C; --orange:#E67E22; --google:#4A9BD4; --pink:#D4537E;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); color:var(--text); font-family:'Crimson Pro',serif; font-size:16px; line-height:1.6; min-height:100vh; }
+body::before { content:''; position:fixed; inset:0; background:
+  radial-gradient(ellipse at 20% 10%, rgba(201,168,76,0.04) 0%, transparent 50%),
+  radial-gradient(ellipse at 80% 90%, rgba(155,89,182,0.05) 0%, transparent 50%); pointer-events:none; z-index:0; }
+.container { max-width:1150px; margin:0 auto; padding:2rem; position:relative; z-index:1; }
+.header { text-align:center; padding:2.5rem 0 1.5rem; }
+.header-ornament { font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--gold-dim); font-family:'Cinzel',serif; margin-bottom:.5rem; }
+.header h1 { font-family:'Cinzel Decorative',serif; font-size:clamp(1.6rem,4.5vw,2.9rem); color:var(--gold); text-shadow:0 0 40px rgba(201,168,76,0.3); letter-spacing:.04em; }
+.header-sub { font-family:'Cinzel',serif; font-size:13px; color:var(--text-dim); letter-spacing:.18em; margin-top:.5rem; }
+.header-line { width:220px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:1.3rem auto; }
+.hero { display:grid; grid-template-columns:300px 1fr; gap:1.5rem; margin-bottom:1.5rem; }
+.card { background:linear-gradient(160deg,var(--bg3),var(--bg2)); border:1px solid var(--border-gold); border-radius:5px; padding:1.5rem; position:relative; overflow:hidden; }
+.card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+.avatar-wrap { width:96px; height:96px; margin:0 auto 1rem; position:relative; }
+.avatar { width:96px; height:96px; border-radius:50%; border:2px solid var(--gold-dim); display:flex; align-items:center; justify-content:center; font-size:2.8rem; background:radial-gradient(circle,var(--bg4),var(--bg2)); box-shadow:0 0 20px rgba(201,168,76,0.15), inset 0 0 20px rgba(0,0,0,0.5); }
+.avatar-glow { position:absolute; inset:-4px; border-radius:50%; background:conic-gradient(var(--gold) 0%,transparent 30%,transparent 70%,var(--gold) 100%); opacity:.3; animation:spin 8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.char-name { font-family:'Cinzel',serif; font-size:1.1rem; color:var(--gold-light); text-align:center; font-weight:600; }
+.char-class { font-size:12px; color:var(--text-dim); text-align:center; letter-spacing:.13em; text-transform:uppercase; margin-top:2px; }
+.char-title { font-size:11px; color:var(--blue-light); text-align:center; font-style:italic; margin-top:3px; }
+.divider2 { height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); margin:1rem 0; }
+.level-badge { background:linear-gradient(135deg,var(--gold-dim),var(--gold)); color:var(--bg); font-family:'Cinzel Decorative',serif; font-size:10px; font-weight:900; padding:3px 8px; border-radius:2px; text-align:center; margin-bottom:.75rem; letter-spacing:.08em; }
+.exp-label { display:flex; justify-content:space-between; font-size:11px; color:var(--text-dim); margin-bottom:4px; }
+.exp-bar { height:7px; background:var(--bg); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+.exp-fill { height:100%; background:linear-gradient(90deg,var(--gold-dim),var(--gold-light)); border-radius:4px; transition:width 1s ease; box-shadow:0 0 8px rgba(201,168,76,0.4); }
+.stat-row { display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; margin-top:.75rem; }
+.stat-label { color:var(--text-dim); font-family:'Cinzel',serif; font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
+.stat-value { color:var(--gold); font-weight:600; }
+.attrs { display:grid; grid-template-columns:1fr 1fr; gap:5px; margin-top:.75rem; }
+.attr { background:var(--bg); border:1px solid var(--border); border-radius:3px; padding:5px 8px; text-align:center; }
+.attr-val { font-family:'Cinzel',serif; font-size:1rem; color:var(--gold); font-weight:600; }
+.attr-name { font-size:9px; color:var(--text-dim); letter-spacing:.08em; text-transform:uppercase; }
+.panel-title { font-family:'Cinzel',serif; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1rem; display:flex; align-items:center; gap:8px; }
+.panel-title::after { content:''; flex:1; height:1px; background:var(--border); }
+.current-quest { background:var(--bg); border:1px solid var(--border-gold); border-left:3px solid var(--gold); border-radius:3px; padding:1rem; margin-bottom:1rem; }
+.quest-tag { font-size:10px; color:var(--gold-dim); letter-spacing:.13em; text-transform:uppercase; font-family:'Cinzel',serif; }
+.quest-name { font-family:'Cinzel',serif; font-size:1rem; color:var(--gold-light); margin:4px 0; }
+.quest-desc { font-size:14px; color:var(--text); }
+.equip-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
+.equip { background:var(--bg); border:1px solid var(--border); border-radius:3px; padding:7px; text-align:center; min-height:62px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; }
+.equip.filled { border-color:var(--gold-dim); }
+.equip.locked { opacity:.35; }
+.equip-icon { font-size:1.3rem; margin-bottom:2px; }
+.equip-name { font-size:9px; color:var(--text-dim); line-height:1.2; }
+.equip.filled .equip-name { color:var(--gold-light); }
+.equip-rar { position:absolute; top:2px; right:3px; font-size:7px; font-family:'Cinzel',serif; }
+.r-uncommon { color:var(--green); } .r-rare { color:var(--blue-light); } .r-epic { color:var(--purple); } .r-legendary { color:var(--gold); }
+.tabs { display:flex; gap:3px; margin-bottom:1.5rem; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.tab { font-family:'Cinzel',serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim); padding:8px 14px; cursor:pointer; border:none; background:none; border-bottom:2px solid transparent; transition:all .2s; }
+.tab:hover { color:var(--text); }
+.tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+.wave-banner { display:flex; align-items:center; gap:12px; padding:1rem 1.3rem; background:linear-gradient(135deg,var(--bg3),var(--bg4)); border:1px solid var(--border-gold); border-radius:5px; margin:1.5rem 0 1rem; }
+.wave-num { width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cinzel Decorative',serif; font-size:.85rem; font-weight:900; color:#fff; flex-shrink:0; }
+.wave-name { font-family:'Cinzel',serif; font-size:.95rem; color:var(--gold-light); }
+.wave-desc { font-size:12px; color:var(--text-dim); margin-top:1px; }
+.wave-banner.locked { opacity:.55; }
+.wave-banner.locked .wave-num { background:var(--bg4) !important; color:var(--text-dim); border:1px solid var(--border); }
+.section-lbl { font-family:'Cinzel',serif; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--text-dim); margin:1rem 0 .6rem; display:flex; align-items:center; gap:8px; }
+.section-lbl::after { content:''; flex:1; height:1px; background:var(--border); }
+.quest-item { background:var(--bg2); border:1px solid var(--border); border-radius:4px; padding:.9rem 1rem .9rem 1.2rem; margin-bottom:.5rem; position:relative; cursor:pointer; transition:border-color .2s,background .2s; }
+.quest-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; border-radius:4px 0 0 4px; }
+.qi-pos::before { background:var(--purple); } .qi-cert::before { background:var(--green); }
+.qi-cloud::before { background:var(--cyan); } .qi-google::before { background:var(--google); }
+.qi-eng::before { background:var(--pink); }
+.qi-git::before { background:var(--gold); }
+.qi-rest::before { background:var(--cyan); }
+.b-git { background:rgba(201,168,76,0.15); color:var(--gold); border:1px solid var(--gold-dim); }
+.b-rest { background:rgba(26,188,156,0.18); color:var(--cyan); border:1px solid var(--cyan); }
+.quest-item.done { opacity:.55; } .quest-item.done::before { background:var(--green); }
+.quest-item.locked { opacity:.4; cursor:default; }
+.quest-item:hover:not(.locked):not(.done) { border-color:var(--border-gold); }
+.qi-head { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; }
+.qi-title { font-family:'Cinzel',serif; font-size:.88rem; color:var(--text-bright); }
+.qi-title.done { text-decoration:line-through; color:var(--text-dim); }
+.qi-badge { font-size:9px; padding:2px 7px; border-radius:2px; font-family:'Cinzel',serif; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; flex-shrink:0; }
+.b-pos { background:rgba(155,89,182,0.15); color:var(--purple); border:1px solid var(--purple-deep); }
+.b-cert { background:rgba(39,174,96,0.15); color:var(--green); border:1px solid var(--green); }
+.b-cloud { background:rgba(26,188,156,0.15); color:var(--cyan); border:1px solid var(--cyan); }
+.b-google { background:rgba(74,155,212,0.15); color:var(--google); border:1px solid var(--google); }
+.b-eng { background:rgba(212,83,126,0.15); color:var(--pink); border:1px solid var(--pink); }
+.b-done { background:rgba(39,174,96,0.15); color:var(--green); border:1px solid var(--green); }
+.b-lock { background:rgba(255,255,255,0.05); color:var(--text-dim); border:1px solid var(--border); }
+.qi-desc { font-size:13px; color:var(--text-dim); margin-top:4px; }
+.qi-rewards { display:flex; gap:6px; margin-top:7px; flex-wrap:wrap; }
+.qi-rw { font-size:11px; color:var(--gold-dim); background:var(--bg); border:1px solid var(--border); border-radius:2px; padding:2px 7px; }
+.complete-btn { background:linear-gradient(135deg,var(--gold-dim),var(--gold)); color:var(--bg); border:none; font-family:'Cinzel',serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:5px 12px; border-radius:2px; cursor:pointer; margin-top:8px; transition:all .2s; }
+.complete-btn:hover { filter:brightness(1.1); }
+.unlock-note { font-size:11px; color:var(--text-dim); font-style:italic; margin-top:5px; }
+.ach-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:.75rem; }
+.ach { background:var(--bg2); border:1px solid var(--border); border-radius:4px; padding:1rem; transition:all .2s; }
+.ach.unlocked { border-color:var(--gold-dim); }
+.ach.locked { opacity:.32; filter:grayscale(1); }
+.ach-icon { font-size:1.9rem; margin-bottom:.5rem; }
+.ach-name { font-family:'Cinzel',serif; font-size:.8rem; color:var(--gold-light); margin-bottom:3px; }
+.ach-desc { font-size:12px; color:var(--text-dim); }
+.legend-row { display:flex; flex-wrap:wrap; gap:14px; margin-bottom:1.25rem; }
+.legend-row span { display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-secondary,var(--text-dim)); }
+.ldot { width:8px; height:8px; border-radius:2px; }
+.notif { position:fixed; bottom:2rem; right:2rem; background:var(--bg3); border:1px solid var(--gold); border-radius:4px; padding:1rem 1.5rem; max-width:320px; transform:translateX(130%); transition:transform .4s cubic-bezier(0.175,0.885,0.32,1.275); z-index:1000; box-shadow:0 4px 20px rgba(0,0,0,0.5); }
+.notif.show { transform:translateX(0); }
+.notif-title { font-family:'Cinzel',serif; font-size:.85rem; color:var(--gold); margin-bottom:3px; }
+.notif-body { font-size:13px; color:var(--text); }
+.rhythm { background:var(--bg2); border:1px solid var(--border); border-radius:5px; padding:1.2rem; margin-bottom:1rem; }
+.rhythm-title { font-family:'Cinzel',serif; font-size:.95rem; color:var(--gold-light); margin-bottom:.5rem; }
+.rhythm-phase { display:flex; gap:12px; padding:.7rem 0; border-bottom:1px solid var(--border); }
+.rhythm-phase:last-child { border-bottom:none; }
+.rhythm-icon { font-size:1.4rem; flex-shrink:0; }
+.rhythm-name { font-size:.85rem; color:var(--text-bright); font-weight:600; }
+.rhythm-desc { font-size:12px; color:var(--text-dim); line-height:1.5; margin-top:2px; }
+.lore-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:.7rem; }
+.lore-item { background:var(--bg2); border:1px solid var(--border); border-left:3px solid var(--purple); border-radius:3px; padding:.7rem 1rem; }
+.lore-item.book { border-left-color:var(--orange); } .lore-item.podcast { border-left-color:var(--cyan); } .lore-item.video { border-left-color:var(--red); }
+.lore-type { font-size:10px; color:var(--text-dim); letter-spacing:.08em; text-transform:uppercase; font-family:'Cinzel',serif; margin-bottom:3px; }
+.lore-name { font-size:.85rem; color:var(--text-bright); font-weight:600; }
+.lore-desc { font-size:12px; color:var(--text-dim); margin-top:2px; }
+.lore-sec-title { font-family:'Cinzel',serif; font-size:12px; letter-spacing:.13em; text-transform:uppercase; color:var(--text-dim); margin:1.5rem 0 .75rem; display:flex; align-items:center; gap:8px; }
+.lore-sec-title::after { content:''; flex:1; height:1px; background:var(--border); }
+::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:var(--bg); } ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+html { -webkit-text-size-adjust:100%; }
+body { -webkit-tap-highlight-color:transparent; }
+/* Área segura do iPhone (notch + barra inferior) quando instalado como app */
+.container {
+  padding-top:max(2rem, env(safe-area-inset-top));
+  padding-left:max(2rem, env(safe-area-inset-left));
+  padding-right:max(2rem, env(safe-area-inset-right));
+  padding-bottom:max(2rem, env(safe-area-inset-bottom));
+}
+.tab { -webkit-user-select:none; user-select:none; }
+.complete-btn { -webkit-user-select:none; user-select:none; touch-action:manipulation; }
+
+@media (max-width:720px) {
+  .container { padding-left:max(1rem, env(safe-area-inset-left)); padding-right:max(1rem, env(safe-area-inset-right)); }
+  .hero { grid-template-columns:1fr; gap:1rem; }
+  .header { padding:1.5rem 0 1rem; }
+  .header h1 { font-size:2rem; }
+  .equip-grid { grid-template-columns:repeat(4,1fr); }
+  /* tabs roláveis horizontalmente em vez de quebrar */
+  .tabs { flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .tabs::-webkit-scrollbar { display:none; }
+  .tab { white-space:nowrap; padding:10px 14px; flex-shrink:0; }
+  /* botões maiores para toque */
+  .complete-btn { padding:9px 16px; font-size:12px; }
+  .quest-item { padding:1rem 1rem 1rem 1.2rem; }
+  /* notificação ocupa largura, acima da barra inferior */
+  .notif { left:1rem; right:1rem; bottom:max(1rem, env(safe-area-inset-bottom)); max-width:none; transform:translateY(160%); }
+  .notif.show { transform:translateY(0); }
+  .legend-row { gap:10px; }
+  .qi-head { flex-wrap:wrap; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-ornament">✦ Crônica da Transição ✦</div>
+    <h1>DevQuest II</h1>
+    <div class="header-sub">A Saga do Engenheiro de IA</div>
+    <div class="header-line"></div>
+  </div>
+
+  <div class="hero">
+    <div class="card">
+      <div class="level-badge" id="levelBadge">NÍVEL 1</div>
+      <div class="avatar-wrap"><div class="avatar" id="avatar">🧙</div><div class="avatar-glow"></div></div>
+      <div class="char-name">Danilo Barbosa</div>
+      <div class="char-class" id="charClass">Aprendiz de Código</div>
+      <div class="char-title" id="charTitle">Iniciado das Linguagens</div>
+      <div class="divider2"></div>
+      <div class="exp-label"><span>⚡ Experiência</span><span id="expText">0 XP</span></div>
+      <div class="exp-bar"><div class="exp-fill" id="expFill" style="width:0%"></div></div>
+      <div class="exp-label" style="margin-top:.7rem"><span>🔷 Mana (energia)</span><span id="manaText">100 / 100</span></div>
+      <div class="exp-bar"><div id="manaFill" style="height:100%;width:100%;background:linear-gradient(90deg,#1A6B8B,#1ABC9C);border-radius:4px;transition:width 1s ease;box-shadow:0 0 8px rgba(26,188,156,0.4)"></div></div>
+      <div id="manaWarn" style="display:none;font-size:11px;color:var(--cyan);margin-top:5px;font-style:italic"></div>
+      <div class="stat-row"><span class="stat-label">Pós Concluídas</span><span class="stat-value" id="sPos">0 / 3</span></div>
+      <div class="stat-row" style="margin-top:4px"><span class="stat-label">Certificações</span><span class="stat-value" id="sCert">0</span></div>
+      <div class="stat-row" style="margin-top:4px"><span class="stat-label">Conquistas</span><span class="stat-value" id="sAch">0</span></div>
+      <div class="divider2"></div>
+      <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px">Atributos</div>
+      <div class="attrs">
+        <div class="attr"><div class="attr-val" id="aCS">12</div><div class="attr-name">C# / .NET</div></div>
+        <div class="attr"><div class="attr-val" id="aJS">4</div><div class="attr-name">JS / Front</div></div>
+        <div class="attr"><div class="attr-val" id="aIA">1</div><div class="attr-name">IA / Agentes</div></div>
+        <div class="attr"><div class="attr-val" id="aCloud">2</div><div class="attr-name">Cloud</div></div>
+        <div class="attr"><div class="attr-val" id="aArch">3</div><div class="attr-name">Arquitetura</div></div>
+        <div class="attr"><div class="attr-val" id="aEN">2</div><div class="attr-name">Inglês</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="panel-title">Quest Ativa</div>
+      <div class="current-quest">
+        <div class="quest-tag">⚔ Aquecimento — Meses 1–2</div>
+        <div class="quest-name">Foundational C# with Microsoft</div>
+        <div class="quest-desc">Você está em ~85%. Finalize os módulos e faça a prova de 80 questões para a primeira vitória da saga.</div>
+        <button class="complete-btn" onclick="complete('q_fcc_cs')">⚡ Concluir Quest</button>
+      </div>
+      <div class="panel-title">Equipamento Lendário</div>
+      <div class="equip-grid" id="equipGrid"></div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('quests')">⚔ Jornada</button>
+    <button class="tab" onclick="showTab('rhythm')">🌊 Ritmo</button>
+    <button class="tab" onclick="showTab('ach')">🏆 Conquistas</button>
+    <button class="tab" onclick="showTab('lore')">📚 Grimório</button>
+    <button class="tab" onclick="showTab('log')">📜 Diário</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-quests">
+    <div class="legend-row">
+      <span><span class="ldot" style="background:var(--pink)"></span>Aquecimento</span>
+      <span><span class="ldot" style="background:var(--purple)"></span>Pós-graduação</span>
+      <span><span class="ldot" style="background:var(--green)"></span>Certificação dev</span>
+      <span><span class="ldot" style="background:var(--cyan)"></span>Cloud</span>
+      <span><span class="ldot" style="background:var(--google)"></span>Google</span>
+      <span><span class="ldot" style="background:var(--gold)"></span>GitHub</span>
+      <span><span class="ldot" style="background:var(--cyan)"></span>Recarga</span>
+    </div>
+    <div id="waves"></div>
+  </div>
+
+  <div class="tab-panel" id="tab-rhythm">
+    <div class="rhythm">
+      <div class="rhythm-title">🌊 O Ciclo de Hiperfoco (2 semanas)</div>
+      <div class="rhythm-phase"><div class="rhythm-icon">🌊</div><div><div class="rhythm-name">Dias 1–4 · Imersão Profunda</div><div class="rhythm-desc">Mergulho total em UM tópico. Sem trocar de assunto. Sessões longas de 3-5h quando o hiperfoco bater.</div></div></div>
+      <div class="rhythm-phase"><div class="rhythm-icon">🔨</div><div><div class="rhythm-name">Dias 5–10 · Construção</div><div class="rhythm-desc">Transforma o aprendido em código no GitHub. MVP, projeto, desafio. Conhecimento vira permanente e portfólio.</div></div></div>
+      <div class="rhythm-phase"><div class="rhythm-icon">🌿</div><div><div class="rhythm-name">Dias 11–14 · Recarga</div><div class="rhythm-desc">Ritmo baixo de propósito. Inglês, leitura, descanso. 1 dia totalmente livre. Recarrega o próximo hiperfoco.</div></div></div>
+    </div>
+    <div class="rhythm">
+      <div class="rhythm-title">🛡️ Regras de Calibração</div>
+      <div class="rhythm-phase"><div class="rhythm-icon">🎯</div><div><div class="rhythm-name">Um alvo visível por vez</div><div class="rhythm-desc">Nunca duas imersões profundas simultâneas. Pós rodam em paralelo no calendário, mas cada sprint foca uma só.</div></div></div>
+      <div class="rhythm-phase"><div class="rhythm-icon">⚡</div><div><div class="rhythm-name">Capture a onda quando vier</div><div class="rhythm-desc">Hiperfoco num dia de recarga? Aproveite. O calendário serve você, não o contrário.</div></div></div>
+      <div class="rhythm-phase"><div class="rhythm-icon">🛡️</div><div><div class="rhythm-name">A recarga é inegociável</div><div class="rhythm-desc">Pular recarga = crash = semanas perdidas. Descanso é engenharia do sistema, não fraqueza.</div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-ach"><div class="ach-grid" id="achGrid"></div></div>
+
+  <div class="tab-panel" id="tab-lore">
+    <div class="lore-sec-title">📖 Tomos — C#, .NET e Arquitetura</div>
+    <div class="lore-grid">
+      <div class="lore-item book"><div class="lore-type">📘 Livro</div><div class="lore-name">Arquitetura Limpa — Uncle Bob</div><div class="lore-desc">Leia uma vez, serve para PUC-Rio e XP. Base de Clean Architecture.</div></div>
+      <div class="lore-item book"><div class="lore-type">📘 Livro</div><div class="lore-name">C# in Depth — Jon Skeet</div><div class="lore-desc">C# avançado. Após a Onda 1.</div></div>
+      <div class="lore-item book"><div class="lore-type">📘 Livro</div><div class="lore-name">Implementando DDD — Vaughn Vernon</div><div class="lore-desc">Domain-Driven Design para a fase de arquitetura.</div></div>
+      <div class="lore-item book"><div class="lore-type">📘 Livro</div><div class="lore-name">The Pragmatic Programmer</div><div class="lore-desc">Filosofia de dev. Leia em paralelo, na recarga.</div></div>
+    </div>
+    <div class="lore-sec-title">🤖 Tomos — IA e Engenharia de Agentes</div>
+    <div class="lore-grid">
+      <div class="lore-item book"><div class="lore-type">📗 Recurso</div><div class="lore-name">Anthropic — Building Agents</div><div class="lore-desc">Guia de construção de agentes. Casa com a UNIPDS.</div></div>
+      <div class="lore-item book"><div class="lore-type">📗 Recurso</div><div class="lore-name">Model Context Protocol (docs)</div><div class="lore-desc">MCP é diferencial da UNIPDS. Leia a spec oficial.</div></div>
+      <div class="lore-item video"><div class="lore-type">▶ Canal</div><div class="lore-name">branas.io — AI-Driven Dev</div><div class="lore-desc">Spec-Driven Development, multi-agentes na prática.</div></div>
+    </div>
+    <div class="lore-sec-title">🎙 Vozes — Podcasts</div>
+    <div class="lore-grid">
+      <div class="lore-item podcast"><div class="lore-type">🎙 Podcast</div><div class="lore-name">Hipsters.tech</div><div class="lore-desc">Maior podcast de tech do Brasil. Em português.</div></div>
+      <div class="lore-item podcast"><div class="lore-type">🎙 Podcast</div><div class="lore-name">.NET Rocks!</div><div class="lore-desc">Semanal sobre .NET. Treina ouvido técnico em inglês.</div></div>
+      <div class="lore-item podcast"><div class="lore-type">🎙 Podcast</div><div class="lore-name">Syntax.fm</div><div class="lore-desc">Frontend e JS. Em inglês — dobra como treino de idioma.</div></div>
+    </div>
+    <div class="lore-sec-title">🎬 Cristais de Visão</div>
+    <div class="lore-grid">
+      <div class="lore-item video"><div class="lore-type">▶ Canal</div><div class="lore-name">Nick Chapsas</div><div class="lore-desc">Melhor canal de .NET avançado. Em inglês.</div></div>
+      <div class="lore-item video"><div class="lore-type">▶ Canal</div><div class="lore-name">Fireship</div><div class="lore-desc">Tech em ritmo rápido. Ótimo para recarga.</div></div>
+      <div class="lore-item video"><div class="lore-type">▶ Site</div><div class="lore-name">learn.microsoft.com (em inglês)</div><div class="lore-desc">Estude em inglês — conteúdo + idioma de uma vez.</div></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-log"><div id="logEntries"><div style="color:var(--text-dim);font-style:italic;font-size:14px">O diário registrará suas conquistas conforme você avança...</div></div></div>
+</div>
+
+<div class="notif" id="notif"><div class="notif-title" id="notifTitle">🏆</div><div class="notif-body" id="notifBody"></div></div>
+
+<script>
+const LEVELS=[
+  {l:1,xp:0,t:"Iniciado das Linguagens",c:"Aprendiz de Código",e:"🧙"},
+  {l:2,xp:600,t:"Escriba do Compilador",c:"Escriba",e:"🧙"},
+  {l:3,xp:1500,t:"Feiticeiro do Código",c:"Feiticeiro",e:"🧝"},
+  {l:4,xp:2800,t:"Guardião da Lógica",c:"Guardião",e:"🧝"},
+  {l:5,xp:4500,t:"Cavaleiro do Stack",c:"Cavaleiro",e:"⚔️"},
+  {l:6,xp:6800,t:"Invocador de Agentes",c:"Invocador",e:"🔮"},
+  {l:7,xp:9500,t:"Arquimago do Backend",c:"Arquimago",e:"🔮"},
+  {l:8,xp:13000,t:"Arquiteto das Soluções",c:"Arquiteto",e:"🏰"},
+  {l:9,xp:17000,t:"Senhor da IA Aplicada",c:"Senhor",e:"👑"},
+  {l:10,xp:22000,t:"Engenheiro de IA",c:"Engenheiro",e:"🌟"},
+  {l:11,xp:28000,t:"Mestre das Três Sagas",c:"Mestre",e:"🌌"},
+  {l:12,xp:36000,t:"Lenda — Engenheiro de IA Global",c:"Lenda",e:"🍁"},
+];
+const QUESTS=[
+  // AQUECIMENTO
+  {id:"q_fcc_cs",wave:0,type:"cert",title:"Foundational C# with Microsoft",xp:300,cert:true,locked:false,desc:"FCC + Microsoft. 35h + prova de 80 questões. Você está em ~85%.",rw:["300 XP","Cert. Microsoft","Espada C# Básica"],eq:"sword1",at:{cs:5}},
+  {id:"q_github",wave:0,type:"cert",title:"GitHub Foundations",xp:200,cert:true,locked:false,desc:"Git, branches, PRs, Actions básico. Oxigênio do desenvolvimento.",rw:["200 XP","Cert. GitHub","Escudo do Git"],eq:"shield1",at:{cs:2}},
+  {id:"q_efset",wave:0,type:"eng",title:"EF SET — Inglês (nível inicial)",xp:150,cert:true,locked:false,desc:"Teste gratuito de inglês + rotina de 30min/dia. Mapeia seu ponto de partida.",rw:["150 XP","Pergaminho do Idioma"],eq:null,at:{en:3}},
+  {id:"q_git0",wave:0,type:"git",title:"📦 Forjar o Perfil GitHub",xp:150,cert:false,locked:false,desc:"Conta profissional (foto + nome real) + repo de perfil com README em inglês + projetos do C# organizados. Seu cartão de visita internacional.",rw:["150 XP","Pena do Cronista"],eq:null,at:{cs:1}},
+  {id:"r_rest0",wave:0,type:"rest",rest:true,title:"🌿 Recarga — Recuperação de Mana",xp:100,cert:false,locked:false,desc:"Você fechou o Aquecimento. Tire 1 dia totalmente livre. Restaura a mana ao máximo. Pular a recarga = crash de hiperfoco.",rw:["100 XP","Mana cheia","Poção de Descanso"],eq:null,at:{}},
+  // ONDA 1
+  {id:"q_puc_s1",wave:1,type:"pos",title:"PUC-Rio · Sprint 1 (Ágil + Requisitos)",xp:400,cert:false,locked:false,desc:"Gestão ágil, engenharia de requisitos, design de interface → MVP 1.",rw:["400 XP","Grimório Ágil"],eq:null,at:{arch:3}},
+  {id:"q_puc_s2",wave:1,type:"pos",title:"PUC-Rio · Sprint 2 (Arquitetura)",xp:500,cert:false,locked:false,desc:"Clean Code, Design Patterns, Microsserviços, Docker → MVP 2. Núcleo de arquitetura.",rw:["500 XP","Martelo do Arquiteto"],eq:"hammer1",at:{arch:6,cs:3}},
+  {id:"q_uni_1",wave:1,type:"pos",title:"UNIPDS · Fundamentos IA + LLMs",xp:350,cert:false,locked:false,desc:"Fundamentos de IA, LLMs para programadores, APIs Generativas, Prompt Engineering.",rw:["350 XP","Orbe dos LLMs"],eq:"orb_ia",at:{ia:6}},
+  {id:"q_uni_2",wave:1,type:"pos",title:"UNIPDS · MCP + Agentes Autônomos",xp:450,cert:false,locked:false,desc:"Model Context Protocol + criação de agentes autônomos. O diferencial do mercado AGORA.",rw:["450 XP","Cetro dos Agentes"],eq:"staff_ag",at:{ia:8}},
+  {id:"q_rwd",wave:1,type:"cert",title:"Responsive Web Design (FCC)",xp:250,cert:true,locked:false,desc:"HTML5, CSS3, Flexbox, Grid. Base de qualquer frontend.",rw:["250 XP","Cert. FCC"],eq:null,at:{js:4}},
+  {id:"q_jsalgo",wave:1,type:"cert",title:"JavaScript Algorithms & DS (FCC)",xp:350,cert:true,locked:false,desc:"JS puro, ES6+, estruturas de dados, algoritmos.",rw:["350 XP","Cert. FCC","Orbe da Lógica"],eq:"orb1",at:{js:6}},
+  {id:"q_cspath",wave:1,type:"cert",title:"C# Developer Path (Microsoft)",xp:400,cert:true,locked:false,desc:"OOP avançado, LINQ, async/await, ASP.NET Core, EF Core. Reforça a PUC-Rio.",rw:["400 XP","Badge Microsoft"],eq:null,at:{cs:6}},
+  {id:"q_az900",wave:1,type:"cloud",title:"★ AZ-900 Azure Fundamentals",xp:300,cert:true,locked:false,desc:"Porta de entrada cloud. Casa com Arquitetura de Sistemas da UNIPDS. Seu alvo forte.",rw:["300 XP","Cert. Microsoft","Cristal da Nuvem"],eq:"crystal1",at:{cloud:5}},
+  {id:"q_git1",wave:1,type:"git",title:"📦 Publicar a Espinha do Portfólio",xp:300,cert:false,locked:false,desc:"3 repos principais com README profissional EM INGLÊS: MVP Sprint 1, MVP Sprint 2 (Clean Code + microsserviços + Docker) e o primeiro projeto de IA da UNIPDS. Recrutador vê isso antes do currículo.",rw:["300 XP","Tomo do Portfólio"],eq:null,at:{cs:2,arch:2}},
+  {id:"r_rest1",wave:1,type:"rest",rest:true,title:"🌿 Recarga — Recuperação de Mana",xp:150,cert:false,locked:false,desc:"Onda 1 foi o pico de esforço (2 pós + AZ-900). Pare, respire, faça algo que ama fora do código por alguns dias. Restaura a mana ao máximo e protege o próximo ciclo.",rw:["150 XP","Mana cheia","Buff: Foco Renovado"],eq:null,at:{}},
+  // ONDA 2
+  {id:"q_puc_s3",wave:2,type:"pos",title:"PUC-Rio · Sprint 3 (Qualidade + Segurança + IA)",xp:550,cert:false,locked:true,desc:"Teste e Qualidade, Desenvolvimento Seguro, Sistemas Inteligentes → MVP final.",rw:["550 XP","Armadura da Qualidade"],eq:"armor1",at:{cs:4,arch:3}},
+  {id:"q_uni_3",wave:2,type:"pos",title:"UNIPDS · Arquitetura IA + Fine Tuning + Capstone",xp:700,cert:true,locked:true,desc:"Arquitetura com IA, Fine Tuning, Segurança/Governança, Capstone Project. CONCLUI a pós.",rw:["700 XP","DIPLOMA: Eng. IA","Manto do Engenheiro IA"],eq:"robe_ia",at:{ia:10,arch:3}},
+  {id:"q_react",wave:2,type:"cert",title:"Front End Libraries / React (FCC)",xp:400,cert:true,locked:true,desc:"React, Redux, Bootstrap. O cert. FCC mais pedido em frontend.",rw:["400 XP","Lâmina do React"],eq:"sword2",at:{js:7}},
+  {id:"q_ts",wave:2,type:"cert",title:"TypeScript (Microsoft Learn)",xp:300,cert:true,locked:true,desc:"Tipagem estática, generics, decorators. Natural para quem vem de C#.",rw:["300 XP","Luvas da Tipagem"],eq:"gloves1",at:{js:4}},
+  {id:"q_qa",wave:2,type:"cert",title:"Quality Assurance (FCC)",xp:300,cert:true,locked:true,desc:"TDD, Mocha/Chai. Casa com a Sprint 3 da PUC e seu xUnit.",rw:["300 XP","Escudo da Qualidade"],eq:null,at:{cs:3}},
+  {id:"q_az204",wave:2,type:"cloud",title:"★ AZ-204 Azure Developer Associate",xp:600,cert:true,locked:true,desc:"Deploy de APIs C#, Functions, CosmosDB. Evolução do AZ-900.",rw:["600 XP","Manto das Nuvens"],eq:"cape1",at:{cloud:8}},
+  {id:"q_git2",wave:2,type:"git",title:"📦 Deploy do Capstone — A Vitrine",xp:500,cert:false,locked:true,desc:"O projeto mais importante de todos: Capstone da UNIPDS deployado com link de demo vivo. + MVP final PUC + React no Vercel. 6 repos pinados. É o que fecha contrato.",rw:["500 XP","Estandarte do Engenheiro","Selo de Deploy"],eq:null,at:{ia:3,arch:2}},
+  {id:"r_rest2",wave:2,type:"rest",rest:true,title:"🌿 Recarga — Recuperação de Mana",xp:200,cert:false,locked:true,desc:"Você concluiu a UNIPDS e começou a se candidatar — marco enorme. Comemore e descanse antes da reta final. Restaura a mana ao máximo.",rw:["200 XP","Mana cheia","Buff: Resiliência"],eq:null,at:{}},
+  // ONDA 3
+  {id:"q_xp_bc1",wave:3,type:"pos",title:"XP · Bootcamp 1 (Arq. Soluções)",xp:450,cert:false,locked:true,desc:"Requisitos, design patterns, arquiteturas modernas. Acelerado pela base da PUC-Rio.",rw:["450 XP","Bússola do Arquiteto"],eq:null,at:{arch:5}},
+  {id:"q_xp_bc2",wave:3,type:"pos",title:"XP · Bootcamp 2 (Arq. Software)",xp:450,cert:false,locked:true,desc:"Segurança, multi-cloud (AWS/Azure/GCP), DevOps, Docker/K8s, dados.",rw:["450 XP","Capacete Multi-cloud"],eq:"helmet1",at:{cloud:5,arch:3}},
+  {id:"q_xp_bc3",wave:3,type:"pos",title:"XP · Bootcamp 3 (IA Expert) + Diploma",xp:600,cert:true,locked:true,desc:"IA generativa aplicada à arquitetura. Reforça a UNIPDS. CONCLUI a pós (+ People Skills).",rw:["600 XP","DIPLOMA: Arquiteto IA","Coroa do Arquiteto"],eq:"crown1",at:{ia:5,arch:6}},
+  {id:"q_meta_fe",wave:3,type:"cert",title:"Meta Front-End Developer (Coursera)",xp:700,cert:true,locked:true,desc:"React avançado, TypeScript, testes. Nome Meta pesa no Canadá.",rw:["700 XP","Cetro do Frontend"],eq:"staff1",at:{js:8}},
+  {id:"q_google_ux",wave:3,type:"google",title:"🔵 Google UX Design Certificate",xp:400,cert:true,locked:true,desc:"Figma, pesquisa, prototipação. Diferencial frontend+UX para o Canadá.",rw:["400 XP","Pincel do Google UX"],eq:"brush1",at:{js:4}},
+  {id:"q_fce",wave:3,type:"eng",title:"Cambridge B2 First (FCE) — Inglês",xp:500,cert:true,locked:true,desc:"Inglês B2 — apto a entrevistas técnicas internacionais. Aceito globalmente.",rw:["500 XP","Coroa do Idioma"],eq:null,at:{en:8}},
+  {id:"q_git3",wave:3,type:"git",title:"📦 Vitrine Internacional",xp:450,cert:false,locked:true,desc:"GitHub e LinkedIn 100% em inglês. READMEs antigos revisados com GIFs de demo. Projeto integrador C#+IA+frontend. 1 contribuição open source. De portfólio a 'contrata em dólar'.",rw:["450 XP","Coroa do Portfólio Global"],eq:null,at:{arch:2,js:2}},
+  {id:"r_rest3",wave:3,type:"rest",rest:true,title:"🌿 Recarga Final — Recuperação de Mana",xp:250,cert:false,locked:true,desc:"As 3 pós concluídas, perfil global pronto. Você atravessou 18 meses. Descanse de verdade antes de mergulhar na trilha de elite. Restaura a mana ao máximo.",rw:["250 XP","Mana cheia","Buff: Veterano"],eq:null,at:{}},
+  // ELITE
+  {id:"q_puc_dip",wave:4,type:"pos",title:"PUC-Rio · Diploma Eng. Software",xp:600,cert:true,locked:true,desc:"Conclusão formal da pós de Engenharia de Software. A fundação consolidada.",rw:["600 XP","DIPLOMA: Eng. Software","Vestes da PUC-Rio"],eq:"robe1",at:{arch:5,cs:3}},
+  {id:"q_google_cloud",wave:4,type:"google",title:"🔵 Google Cloud Associate Engineer",xp:600,cert:true,locked:true,desc:"Multi-cloud (Azure+GCP). Muito valorizado no Canadá.",rw:["600 XP","Selo do GCP"],eq:null,at:{cloud:8}},
+  {id:"q_ckad",wave:4,type:"cloud",title:"CKAD — Kubernetes App Developer",xp:800,cert:true,locked:true,desc:"Kubernetes na prática. Padrão cloud-native. Salário premium.",rw:["800 XP","Armadura do Kubernetes"],eq:"armor2",at:{cloud:10}},
+  {id:"q_aws",wave:4,type:"cloud",title:"AWS Cloud Practitioner",xp:400,cert:true,locked:true,desc:"Completa o tripé multi-cloud para o exterior.",rw:["400 XP","Tridente AWS"],eq:null,at:{cloud:5}},
+];
+const WAVES=[
+  {n:0,label:"AQUECIMENTO",roman:"0",color:"#D4537E",name:"Meses 1–2 — Aquecimento",desc:"Certificações-base + inglês + matrículas. Comece agora.",unlock:()=>true},
+  {n:1,label:"ONDA 1",roman:"I",color:"#378ADD",name:"Meses 3–8 — As Duas Fundações",desc:"PUC-Rio (ES) + UNIPDS (EIA) em paralelo + AZ-900. Pico do esforço.",unlock:()=>S.done.includes('q_fcc_cs')&&S.done.includes('q_github')},
+  {n:2,label:"ONDA 2",roman:"II",color:"#7F77DD",name:"Meses 9–12 — Conclusão + Mercado",desc:"UNIPDS conclui, PUC final, AZ-204. AQUI começam as candidaturas.",unlock:()=>cl()>=4},
+  {n:3,label:"ONDA 3",roman:"III",color:"#E67E22",name:"Meses 13–18 — Arquitetura + Internacional",desc:"XP (AS com IA) + Google UX + Meta + inglês B2.",unlock:()=>cl()>=7},
+  {n:4,label:"ELITE",roman:"IV",color:"#1ABC9C",name:"Pós-18 meses — Trilha de Elite (Canadá)",desc:"Diplomas finais + multi-cloud + Kubernetes. CAD 120k+.",unlock:()=>cl()>=9},
+];
+const EQUIP=[
+  {id:"sword1",name:"Espada C# Básica",icon:"⚔️",rar:"uncommon"},
+  {id:"shield1",name:"Escudo do Git",icon:"🛡️",rar:"uncommon"},
+  {id:"orb1",name:"Orbe da Lógica",icon:"🔮",rar:"rare"},
+  {id:"hammer1",name:"Martelo do Arquiteto",icon:"🔨",rar:"rare"},
+  {id:"orb_ia",name:"Orbe dos LLMs",icon:"🌐",rar:"rare"},
+  {id:"staff_ag",name:"Cetro dos Agentes",icon:"🪄",rar:"epic"},
+  {id:"crystal1",name:"Cristal da Nuvem",icon:"💠",rar:"rare"},
+  {id:"sword2",name:"Lâmina do React",icon:"⚡",rar:"epic"},
+  {id:"gloves1",name:"Luvas da Tipagem",icon:"🧤",rar:"rare"},
+  {id:"armor1",name:"Armadura da Qualidade",icon:"🥋",rar:"epic"},
+  {id:"robe_ia",name:"Manto do Eng. IA",icon:"🌌",rar:"legendary"},
+  {id:"cape1",name:"Manto das Nuvens",icon:"☁️",rar:"epic"},
+  {id:"helmet1",name:"Capacete Multi-cloud",icon:"⛑️",rar:"epic"},
+  {id:"staff1",name:"Cetro do Frontend",icon:"🪄",rar:"legendary"},
+  {id:"brush1",name:"Pincel Google UX",icon:"🎨",rar:"epic"},
+  {id:"crown1",name:"Coroa do Arquiteto",icon:"👑",rar:"legendary"},
+  {id:"robe1",name:"Vestes da PUC-Rio",icon:"🎓",rar:"legendary"},
+  {id:"armor2",name:"Armadura do Kubernetes",icon:"💎",rar:"legendary"},
+];
+const ACH=[
+  {id:"a_first",n:"Primeiro Passo",i:"👣",d:"Conclua sua primeira quest"},
+  {id:"a_az900",n:"Pés na Nuvem",i:"☁️",d:"Conquiste o AZ-900"},
+  {id:"a_wave1",n:"Fundações Erguidas",i:"🏗️",d:"Complete toda a Onda 1"},
+  {id:"a_agents",n:"Invocador de Agentes",i:"🤖",d:"Domine MCP + Agentes na UNIPDS"},
+  {id:"a_unipds",n:"Engenheiro de IA",i:"🧠",d:"Conclua a pós da UNIPDS"},
+  {id:"a_market",n:"Pronto para o Mercado",i:"💼",d:"Chegue à Onda 2 — comece a se candidatar"},
+  {id:"a_az204",n:"Senhor das Nuvens",i:"🌩️",d:"Conquiste o AZ-204"},
+  {id:"a_puc",n:"Engenheiro de Software",i:"⚙️",d:"Conclua a pós da PUC-Rio"},
+  {id:"a_xp",n:"Arquiteto de IA",i:"🏰",d:"Conclua a pós da XP"},
+  {id:"a_3pos",n:"Mestre das Três Sagas",i:"🎓",d:"Conclua as 3 pós-graduações"},
+  {id:"a_google",n:"Aliado do Google",i:"🔵",d:"Conquiste uma certificação Google"},
+  {id:"a_b2",n:"Voz Global",i:"🗣️",d:"Atinja inglês B2 (FCE)"},
+  {id:"a_lvl10",n:"Engenheiro de IA Pleno",i:"🌟",d:"Alcance o Nível 10"},
+  {id:"a_portfolio",n:"Cronista do Código",i:"📦",d:"Publique a vitrine internacional no GitHub"},
+  {id:"a_mana",n:"Mestre do Equilíbrio",i:"🌿",d:"Honre todas as recargas — descanso é estratégia"},
+  {id:"a_canada",n:"Horizonte em Dólar",i:"🌍",d:"Trilha de elite — rumo ao mercado global"},
+];
+
+let S={xp:85,done:[],eq:[],ach:{},log:[],mana:100,questsSinceRest:0};
+try{const sv=localStorage.getItem('devquest2_danilo');if(sv){S=JSON.parse(sv);if(S.mana===undefined)S.mana=100;if(S.questsSinceRest===undefined)S.questsSinceRest=0;}}catch(e){}
+function save(){try{localStorage.setItem('devquest2_danilo',JSON.stringify(S));}catch(e){}}
+function lvl(){let r=LEVELS[0];for(const l of LEVELS)if(S.xp>=l.xp)r=l;return r;}
+function nextLvl(){const c=lvl();return LEVELS.find(l=>l.l===c.l+1)||null;}
+function cl(){return lvl().l;}
+function pct(){const c=lvl(),n=nextLvl();if(!n)return 100;return Math.min(100,Math.round(((S.xp-c.xp)/(n.xp-c.xp))*100));}
+function waveUnlocked(w){return w.unlock();}
+function questLocked(q){if(!q.locked)return false;if(S.done.includes(q.id))return false;const w=WAVES.find(x=>x.n===q.wave);return w?!waveUnlocked(w):false;}
+function notify(t,b){const e=document.getElementById('notif');document.getElementById('notifTitle').textContent=t;document.getElementById('notifBody').textContent=b;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),4000);}
+function addLog(t){const d=new Date().toLocaleDateString('pt-BR');S.log.unshift({d,t});save();renderLog();}
+
+function renderChar(){
+  const c=lvl(),n=nextLvl();
+  document.getElementById('levelBadge').textContent="NÍVEL "+c.l;
+  document.getElementById('avatar').textContent=c.e;
+  document.getElementById('charClass').textContent=c.c;
+  document.getElementById('charTitle').textContent=c.t;
+  document.getElementById('expFill').style.width=pct()+'%';
+  document.getElementById('expText').textContent=n?S.xp+" / "+n.xp+" XP":S.xp+" XP — MÁX";
+  const mana=Math.max(0,Math.min(100,S.mana));
+  document.getElementById('manaFill').style.width=mana+'%';
+  document.getElementById('manaText').textContent=mana+" / 100";
+  const warn=document.getElementById('manaWarn');
+  if(mana<=30){warn.style.display='block';warn.textContent='⚠ Mana baixa — risco de crash de hiperfoco. Hora de uma Recarga.';}
+  else if(mana<=60){warn.style.display='block';warn.textContent='🔷 Mana caindo. Planeje uma Recarga em breve.';}
+  else{warn.style.display='none';}
+  const posDone=['q_uni_3','q_xp_bc3','q_puc_dip'].filter(id=>S.done.includes(id)).length;
+  document.getElementById('sPos').textContent=posDone+" / 3";
+  document.getElementById('sCert').textContent=S.done.filter(id=>QUESTS.find(q=>q.id===id)?.cert).length;
+  document.getElementById('sAch').textContent=Object.values(S.ach).filter(Boolean).length;
+  let cs=12,js=4,ia=1,cloud=2,arch=3,en=2;
+  S.done.forEach(id=>{const q=QUESTS.find(x=>x.id===id);if(q?.at){cs+=q.at.cs||0;js+=q.at.js||0;ia+=q.at.ia||0;cloud+=q.at.cloud||0;arch+=q.at.arch||0;en+=q.at.en||0;}});
+  document.getElementById('aCS').textContent=cs;document.getElementById('aJS').textContent=js;
+  document.getElementById('aIA').textContent=ia;document.getElementById('aCloud').textContent=cloud;
+  document.getElementById('aArch').textContent=arch;document.getElementById('aEN').textContent=en;
+}
+function renderEquip(){
+  const g=document.getElementById('equipGrid');g.innerHTML='';
+  const show=EQUIP.slice(0,8);
+  EQUIP.filter(e=>S.eq.includes(e.id)).slice(-8).forEach(()=>{});
+  const owned=EQUIP.filter(e=>S.eq.includes(e.id));
+  const display=owned.length>=8?owned.slice(-8):[...owned,...Array(8-owned.length).fill(null)];
+  display.forEach(e=>{
+    const d=document.createElement('div');
+    if(e){d.className='equip filled';const rc={uncommon:'r-uncommon',rare:'r-rare',epic:'r-epic',legendary:'r-legendary'}[e.rar];
+      d.innerHTML='<span class="equip-rar '+rc+'">'+e.rar.slice(0,4)+'</span><div class="equip-icon">'+e.icon+'</div><div class="equip-name">'+e.name+'</div>';d.title=e.name;}
+    else{d.className='equip locked';d.innerHTML='<div class="equip-icon" style="opacity:.3">🔒</div><div class="equip-name">vazio</div>';}
+    g.appendChild(d);
+  });
+}
+function renderWaves(){
+  const root=document.getElementById('waves');root.innerHTML='';
+  WAVES.forEach(w=>{
+    const unlocked=waveUnlocked(w);
+    const banner=document.createElement('div');
+    banner.className='wave-banner'+(unlocked?'':' locked');
+    banner.innerHTML='<div class="wave-num" style="background:'+w.color+'">'+w.roman+'</div><div><div class="wave-name">'+w.name+'</div><div class="wave-desc">'+(unlocked?w.desc:'🔒 '+w.desc)+'</div></div>';
+    root.appendChild(banner);
+    const qs=QUESTS.filter(q=>q.wave===w.n);
+    const grid=document.createElement('div');
+    qs.forEach(q=>grid.appendChild(makeQuest(q)));
+    root.appendChild(grid);
+  });
+}
+function makeQuest(q){
+  const done=S.done.includes(q.id),locked=questLocked(q);
+  const d=document.createElement('div');
+  d.className='quest-item qi-'+q.type+(done?' done':'')+(locked?' locked':'');
+  let badge;
+  if(done)badge='<span class="qi-badge b-done">✓ Feito</span>';
+  else if(locked)badge='<span class="qi-badge b-lock">🔒</span>';
+  else badge='<span class="qi-badge b-'+q.type+'">'+({pos:'Pós',cert:'Cert',cloud:'Cloud',google:'Google',eng:'Inglês',git:'GitHub',rest:'Recarga'}[q.type])+'</span>';
+  d.innerHTML='<div class="qi-head"><div class="qi-title'+(done?' done':'')+'">'+q.title+'</div>'+badge+'</div>'+
+    '<div class="qi-desc">'+q.desc+'</div>'+
+    '<div class="qi-rewards">'+q.rw.map(r=>'<span class="qi-rw">'+r+'</span>').join('')+'</div>'+
+    (!done&&!locked?'<button class="complete-btn" onclick="event.stopPropagation();complete(\''+q.id+'\')">'+(q.rest?'🌿 Recarregar Mana':'⚡ Concluir')+'</button>':'')+
+    (locked?'<div class="unlock-note">Complete a onda anterior para desbloquear</div>':'');
+  return d;
+}
+function renderAch(){
+  const g=document.getElementById('achGrid');g.innerHTML='';
+  ACH.forEach(a=>{const u=S.ach[a.id];const d=document.createElement('div');d.className='ach '+(u?'unlocked':'locked');
+    d.innerHTML='<div class="ach-icon">'+a.i+'</div><div class="ach-name">'+a.n+'</div><div class="ach-desc">'+a.d+'</div>';g.appendChild(d);});
+}
+function renderLog(){
+  const e=document.getElementById('logEntries');
+  if(!S.log.length){e.innerHTML='<div style="color:var(--text-dim);font-style:italic;font-size:14px">O diário registrará suas conquistas...</div>';return;}
+  e.innerHTML=S.log.map(x=>'<div style="border-bottom:1px solid var(--border);padding:.7rem 0"><div style="font-size:11px;color:var(--text-dim);font-family:Cinzel,serif;letter-spacing:.08em">'+x.d+'</div><div style="font-size:14px;color:var(--text);margin-top:3px">'+x.t+'</div></div>').join('');
+}
+function complete(id){
+  const q=QUESTS.find(x=>x.id===id);if(!q||S.done.includes(id)||questLocked(q))return;
+  const pl=cl();
+  S.done.push(id);S.xp+=q.xp;
+  if(q.rest){
+    S.mana=100;S.questsSinceRest=0;
+    if(q.eq&&!S.eq.includes(q.eq)){S.eq.push(q.eq);}
+    addLog('🌿 '+q.title+' — mana restaurada ao máximo, +'+q.xp+' XP');
+    notify('🌿 Mana Recuperada!','Descanso é engenharia do sistema. Mana cheia — pronto para o próximo ciclo de hiperfoco.');
+    const nlr=cl();
+    if(nlr>pl)setTimeout(()=>notify('🌟 LEVEL UP! Nível '+nlr,'Você é agora um '+lvl().c+'!'),1000);
+    checkAch(q);save();renderAll();return;
+  }
+  S.questsSinceRest++;
+  S.mana=Math.max(0,S.mana-18);
+  if(q.eq&&!S.eq.includes(q.eq)){S.eq.push(q.eq);const e=EQUIP.find(x=>x.id===q.eq);if(e)setTimeout(()=>notify('🎁 Equipamento!',e.icon+' '+e.name+' obtido!'),500);}
+  checkAch(q);
+  const nl=cl();
+  if(nl>pl)setTimeout(()=>notify('🌟 LEVEL UP! Nível '+nl,'Você é agora um '+lvl().c+'!'),1000);
+  addLog('⚔️ '+q.title+' — +'+q.xp+' XP');
+  notify('✅ Quest Concluída!','"'+q.title+'" — +'+q.xp+' XP');
+  if(S.mana<=30)setTimeout(()=>notify('⚠ Mana Baixa','Cuidado com o crash de hiperfoco. Faça a Recarga da onda antes de seguir.'),1500);
+  save();renderAll();
+}
+function checkAch(q){
+  const u=(id)=>{if(!S.ach[id]){S.ach[id]=true;const a=ACH.find(x=>x.id===id);if(a)setTimeout(()=>notify('🏆 '+a.n,a.d),2000);addLog('🏆 Conquista: "'+ACH.find(x=>x.id===id).n+'"');}};
+  if(S.done.length===1)u('a_first');
+  if(S.done.includes('q_az900'))u('a_az900');
+  if(QUESTS.filter(x=>x.wave===1).every(x=>S.done.includes(x.id)))u('a_wave1');
+  if(S.done.includes('q_uni_2'))u('a_agents');
+  if(S.done.includes('q_uni_3'))u('a_unipds');
+  if(cl()>=4||S.done.includes('q_az204'))u('a_market');
+  if(S.done.includes('q_az204'))u('a_az204');
+  if(S.done.includes('q_puc_dip'))u('a_puc');
+  if(S.done.includes('q_xp_bc3'))u('a_xp');
+  if(['q_uni_3','q_xp_bc3','q_puc_dip'].every(id=>S.done.includes(id)))u('a_3pos');
+  if(S.done.includes('q_google_ux')||S.done.includes('q_google_cloud'))u('a_google');
+  if(S.done.includes('q_fce'))u('a_b2');
+  if(cl()>=10)u('a_lvl10');
+  if(S.done.includes('q_git3'))u('a_portfolio');
+  if(['r_rest0','r_rest1','r_rest2','r_rest3'].every(id=>S.done.includes(id)))u('a_mana');
+  if(WAVES[4].unlock())u('a_canada');
+}
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+function renderAll(){renderChar();renderEquip();renderWaves();renderAch();renderLog();}
+renderAll();
+</script>
+</body>
+</html>
