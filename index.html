@@ -215,23 +215,18 @@ body { -webkit-tap-highlight-color:transparent; }
 
     <div class="card">
       <div class="panel-title">Quest Ativa</div>
-      <div class="current-quest">
-        <div class="quest-tag">⚔ Aquecimento — Meses 1–2</div>
-        <div class="quest-name">Foundational C# with Microsoft</div>
-        <div class="quest-desc">Você está em ~85%. Finalize os módulos e faça a prova de 80 questões para a primeira vitória da saga.</div>
-        <button class="complete-btn" onclick="complete('q_fcc_cs')">⚡ Concluir Quest</button>
-      </div>
+      <div class="current-quest" id="heroQuest"></div>
       <div class="panel-title">Equipamento Lendário</div>
       <div class="equip-grid" id="equipGrid"></div>
     </div>
   </div>
 
   <div class="tabs">
-    <button class="tab active" onclick="showTab('quests')">⚔ Jornada</button>
-    <button class="tab" onclick="showTab('rhythm')">🌊 Ritmo</button>
-    <button class="tab" onclick="showTab('ach')">🏆 Conquistas</button>
-    <button class="tab" onclick="showTab('lore')">📚 Grimório</button>
-    <button class="tab" onclick="showTab('log')">📜 Diário</button>
+    <button class="tab active" onclick="showTab('quests',this)">⚔ Jornada</button>
+    <button class="tab" onclick="showTab('rhythm',this)">🌊 Ritmo</button>
+    <button class="tab" onclick="showTab('ach',this)">🏆 Conquistas</button>
+    <button class="tab" onclick="showTab('lore',this)">📚 Grimório</button>
+    <button class="tab" onclick="showTab('log',this)">📜 Diário</button>
   </div>
 
   <div class="tab-panel active" id="tab-quests">
@@ -439,8 +434,6 @@ function renderChar(){
 }
 function renderEquip(){
   const g=document.getElementById('equipGrid');g.innerHTML='';
-  const show=EQUIP.slice(0,8);
-  EQUIP.filter(e=>S.eq.includes(e.id)).slice(-8).forEach(()=>{});
   const owned=EQUIP.filter(e=>S.eq.includes(e.id));
   const display=owned.length>=8?owned.slice(-8):[...owned,...Array(8-owned.length).fill(null)];
   display.forEach(e=>{
@@ -533,13 +526,23 @@ function checkAch(q){
   if(['r_rest0','r_rest1','r_rest2','r_rest3'].every(id=>S.done.includes(id)))u('a_mana');
   if(WAVES[4].unlock())u('a_canada');
 }
-function showTab(id){
+function showTab(id,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
-  event.target.classList.add('active');
+  if(btn)btn.classList.add('active');
 }
-function renderAll(){renderChar();renderEquip();renderWaves();renderAch();renderLog();}
+function renderHeroQuest(){
+  const el=document.getElementById('heroQuest');
+  const next=QUESTS.find(q=>!S.done.includes(q.id)&&!questLocked(q));
+  if(!next){el.innerHTML='<div class="quest-tag">✨ Todas as quests desbloqueadas concluídas!</div>';return;}
+  const w=WAVES.find(x=>x.n===next.wave);
+  el.innerHTML='<div class="quest-tag">⚔ '+w.name+'</div>'+
+    '<div class="quest-name">'+next.title+'</div>'+
+    '<div class="quest-desc">'+next.desc+'</div>'+
+    '<button class="complete-btn" onclick="complete(\''+next.id+'\')">'+(next.rest?'🌿 Recarregar Mana':'⚡ Concluir Quest')+'</button>';
+}
+function renderAll(){renderChar();renderEquip();renderWaves();renderAch();renderLog();renderHeroQuest();}
 renderAll();
 </script>
 </body>
